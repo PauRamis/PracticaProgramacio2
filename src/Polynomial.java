@@ -6,6 +6,10 @@ public class Polynomial {
 
     // Constructor a partir dels coeficients del polinomi en forma d'array
     public Polynomial(float[] cfs) {
+        float f = cfs[1];
+        float s = cfs[2];
+        toString(f, s);
+
     }
 
     // Constructor a partir d'un string
@@ -41,7 +45,10 @@ public class Polynomial {
 
     // Torna la representació en forma de String del polinomi. Override d'un mètode de la classe Object
     @Override
-    public String toString() {
+    public String toString(float f, float s) {
+        String answ;
+        if (f == 1.0F) f = 0;
+
         return "";
     }
 }
