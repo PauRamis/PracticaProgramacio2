@@ -10,11 +10,11 @@ public class Polynomial {
     public Polynomial(float[] cfs) {
         String compilador = "";
         for (int i = 0; i < cfs.length; i++) {
-            String trad = toString(cfs[i]);
-            compilador = compilador + trad;
-
+           if (cfs[i] =! 0){
+               if (cfs[i] == 1) compilador = "X";
+               else compilador = (int) cfs + "X";
+           }
         }
-
     }
 
     // Constructor a partir d'un string
@@ -50,9 +50,8 @@ public class Polynomial {
 
     // Torna la representació en forma de String del polinomi. Override d'un mètode de la classe Object
     @Override
-    public String toString(float f) {
-        if (f == 1.0F) f = 0;
-        String result = Float.toString(f);
-        return result;
+    public String toString() {
+
+        return "";
     }
 }
