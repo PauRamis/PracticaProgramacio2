@@ -1,3 +1,5 @@
+import java.sql.Struct;
+
 public class Polynomial {
 
     // Constructor per defecte. Genera un polinomi zero
@@ -6,9 +8,12 @@ public class Polynomial {
 
     // Constructor a partir dels coeficients del polinomi en forma d'array
     public Polynomial(float[] cfs) {
-        float f = cfs[1];
-        float s = cfs[2];
-        toString(f, s);
+        String compilador = "";
+        for (int i = 0; i < cfs.length; i++) {
+            String trad = toString(cfs[i]);
+            compilador = compilador + trad;
+
+        }
 
     }
 
@@ -45,10 +50,9 @@ public class Polynomial {
 
     // Torna la representació en forma de String del polinomi. Override d'un mètode de la classe Object
     @Override
-    public String toString(float f, float s) {
-        String answ;
+    public String toString(float f) {
         if (f == 1.0F) f = 0;
-
-        return "";
+        String result = Float.toString(f);
+        return result;
     }
 }
