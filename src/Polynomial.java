@@ -5,6 +5,7 @@ public class Polynomial {
 
     // Constructor per defecte. Genera un polinomi zero
     public Polynomial() {
+        coef[0] = 0.0f;
     }
 
     // Constructor a partir dels coeficients del polinomi en forma d'array
