@@ -9,22 +9,22 @@ public class PolynomialTest {
     public void constructs1() {
         Polynomial p;
 
-       p = new Polynomial(new float[]{1, 5});
+        p = new Polynomial(new float[]{1, 5});
         assertEquals("x + 5", p.toString());
 
-         p = new Polynomial(new float[]{0});
+        p = new Polynomial(new float[]{0});
         assertEquals("0", p.toString());
 
         p = new Polynomial();
         assertEquals("0", p.toString());
 
-      /*  p = new Polynomial(new float[]{0, 0, 0});
+        p = new Polynomial(new float[]{0, 0, 0});
         assertEquals("0", p.toString());
 
         p = new Polynomial(new float[]{0, 0, 0});
         assertEquals(new Polynomial("0"), p);
 
-        p = new Polynomial(new float[]{-6, 0, 0, 20, -8});
+      /*  p = new Polynomial(new float[]{-6, 0, 0, 20, -8});
         assertEquals("-6x^4 + 20x - 8", p.toString());*/
     }
 
@@ -205,9 +205,6 @@ public class PolynomialTest {
 
         p = new Polynomial("x^12 + 1");
         assertNull(p.roots());
-
-
-
 
 
     }

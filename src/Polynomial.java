@@ -1,11 +1,11 @@
 import java.sql.Struct;
+import java.util.Objects;
 
 public class Polynomial {
     float[] coef;
 
     // Constructor per defecte. Genera un polinomi zero
     public Polynomial() {
-        coef[0] = 0.0f;
     }
 
     // Constructor a partir dels coeficients del polinomi en forma d'array
@@ -41,18 +41,20 @@ public class Polynomial {
     // Torna "true" si els polinomis són iguals. Això és un override d'un mètode de la classe Object
     @Override
     public boolean equals(Object o) {
-        return false;
+        Polynomial p = (Polynomial) o;
+        return this.toString().equals(p.toString());
     }
 
     // Torna la representació en forma de String del polinomi. Override d'un mètode de la classe Object
     @Override
     public String toString() {
+        //Si l'array es nul, retornará "0"
+        if (coef == null) return "0";
+
         String compilador = "";
         String polinomi = "";
-        if (coef.length == 1 && coef[0] == 0){
-            polinomi = "0";
-        }
-        else for (int i = 0; i < coef.length; i++) {
+
+         for (int i = 0; i < coef.length; i++) {
 
             //Si el numero és 0, no és posa res
             if (coef[i] == 0) {
@@ -69,6 +71,10 @@ public class Polynomial {
             if (i != coef.length - 1 && coef[i] != 0) compilador = compilador +" + ";
 
             polinomi = polinomi + compilador;
+        }
+
+        if (polinomi.equals("")){
+            polinomi = "0";
         }
         return polinomi;
     }
