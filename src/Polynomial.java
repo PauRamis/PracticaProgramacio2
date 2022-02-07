@@ -15,6 +15,7 @@ public class Polynomial {
 
     // Constructor a partir d'un string
     public Polynomial(String s) {
+
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
@@ -55,7 +56,6 @@ public class Polynomial {
         String polinomi = "";
 
          for (int i = 0; i < coef.length; i++) {
-
             //Si el numero és 0, no és posa res
             if (coef[i] == 0) {
                 compilador = "";
@@ -67,28 +67,33 @@ public class Polynomial {
             //Els altres casos, és posa el numero més la X
             else compilador = Math.round(coef[i]) + ferX(i, coef.length);
 
+            //Afegim el signe
+            compilador = posarSigne(i, compilador);
 
-
-            //Si el numero és 0 o és el primer no es posa signe
-            if (coef[i] != 0 && coef[i] != coef[0]){
-                //Posam signe positiu o negatu
-                if (coef[i] > 0){
-                    compilador = " + " + compilador;
-                }
-                else {
-                    //Pels negatius, simplement volem espaiar el signe negatiu
-                    compilador = compilador.replace("-", " - ");
-                }
-            }
-
-
+            //sumam el compilador al polinomi que tornarem
             polinomi = polinomi + compilador;
         }
 
+         //Si ha quedat buid, aleshores són tot 0.
         if (polinomi.equals("")){
             polinomi = "0";
         }
         return polinomi;
+    }
+
+    private String posarSigne(int i, String compilador) {
+        //Si el numero és 0 o és el primer no es posa signe
+        if (coef[i] != 0 && coef[i] != coef[0]){
+            //Posam signe positiu o negatu
+            if (coef[i] > 0){
+                compilador = " + " + compilador;
+            }
+            else {
+                //Pels negatius, simplement volem espaiar el signe negatiu
+                compilador = compilador.replace("-", " - ");
+            }
+        }
+        return compilador;
     }
 
     private String ferX(int i, int length) {
