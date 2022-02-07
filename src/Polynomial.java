@@ -67,15 +67,17 @@ public class Polynomial {
             //Els altres casos, és posa el numero més la X
             else compilador = Math.round(coef[i]) + ferX(i, coef.length);
 
-            //Si el numero és 0 o no n'hi ha més després, no es posa signe
-            if (i != coef.length - 1 && coef[i] != 0){
-                //Posam signe positiu o negatu depenguent del proxim número
-                if (coef[i+1] >= 0){
-                    compilador = compilador +" + ";
+
+
+            //Si el numero és 0 o és el primer no es posa signe
+            if (coef[i] != 0 && coef[i] != coef[0]){
+                //Posam signe positiu o negatu
+                if (coef[i] > 0){
+                    compilador = " + " + compilador;
                 }
-                else if(i != 0) {
-                    compilador = compilador.replace("-", "");
-                    compilador = compilador + " - ";
+                else {
+                    //Pels negatius, simplement volem espaiar el signe negatiu
+                    compilador = compilador.replace("-", " - ");
                 }
             }
 
