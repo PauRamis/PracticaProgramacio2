@@ -15,11 +15,47 @@ public class Polynomial {
 
     // Constructor a partir d'un string
     public Polynomial(String s) {
-        //Separar per monomis
+        /*Bucle que va rotant 'estat'
+        Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
+        int state = 0;
+        char signe;
+        int num = 0;
+        int exponent;
 
-        //Juntar monomis per la X
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            //Els espais s'ignoren
+            if (c == ' ') continue;
 
-        //
+            if (state == 0) {
+                if (c == '-') signe = '-';
+                state = 1;
+            }
+            else if (state == 1) {
+                if (c == 'x') state = 2;
+                else num = num + c;
+            }
+
+            if (state == 2) {
+                state = 3;
+            }
+            else if (state == 3) {
+             state = 4;
+            }
+            else if (state == 4){
+                if (c == '-' || c == '+') state = 0;
+                exponent = c;
+            }
+        }
+
+        //estat 0 = cercar signe --Després del signe->
+        //estat 1 = coeficent de X --Al trobar una X->
+        //estat 2 = cercar X --Després de la X->
+        //estat 3 = Cercar ^ --Després del ^->
+        //estat 4 = Cercar exponent --Al trobar un signe->> Repetir
+
+
+        //Hauria de tornar un this.coef amb un array
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
@@ -59,14 +95,14 @@ public class Polynomial {
         String compilador = "";
         String polinomi = "";
 
-         for (int i = 0; i < coef.length; i++) {
+        for (int i = 0; i < coef.length; i++) {
             //Si el numero és 0, no és posa res
             if (coef[i] == 0) {
                 compilador = "";
             }
             //Si el numero és 1, només es posa la X
             else if (coef[i] == 1) {
-                 compilador = ferX(i, coef.length);
+                compilador = ferX(i, coef.length);
             }
             //Els altres casos, és posa el numero més la X
             else compilador = Math.round(coef[i]) + ferX(i, coef.length);
@@ -78,8 +114,8 @@ public class Polynomial {
             polinomi = polinomi + compilador;
         }
 
-         //Si ha quedat buid, aleshores són tot 0.
-        if (polinomi.equals("")){
+        //Si ha quedat buid, aleshores són tot 0.
+        if (polinomi.equals("")) {
             polinomi = "0";
         }
         return polinomi;
@@ -87,12 +123,11 @@ public class Polynomial {
 
     private String posarSigne(int i, String compilador) {
         //Si el numero és 0 o és el primer no es posa signe
-        if (coef[i] != 0 && coef[i] != coef[0]){
+        if (coef[i] != 0 && coef[i] != coef[0]) {
             //Posam signe positiu o negatu
-            if (coef[i] > 0){
+            if (coef[i] > 0) {
                 compilador = " + " + compilador;
-            }
-            else {
+            } else {
                 //Pels negatius, simplement volem espaiar el signe negatiu
                 compilador = compilador.replace("-", " - ");
             }
@@ -106,14 +141,14 @@ public class Polynomial {
         String lletra = "X";
 
         //Si es l'ultim caracter, no té X
-        if (i == length - 1){
+        if (i == length - 1) {
             lletra = "";
 
             //Si l'exponent és 1, no es mostra.
-        } else if (length - 1 -i == 1){
+        } else if (length - 1 - i == 1) {
             lletra = "x";
         } else {
-            lletra = "x^"+ (length - 1 -i);
+            lletra = "x^" + (length - 1 - i);
         }
 
         return lletra;
