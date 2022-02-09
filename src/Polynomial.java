@@ -15,7 +15,11 @@ public class Polynomial {
 
     // Constructor a partir d'un string
     public Polynomial(String s) {
+        //Separar per monomis
 
+        //Juntar monomis per la X
+
+        //
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
