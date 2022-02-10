@@ -17,10 +17,35 @@ public class Polynomial {
     public Polynomial(String s) {
         /*Bucle que va rotant 'estat'
         Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
+        char signe;
+        int num = 0;
+        int exponent;
+        int maxExponent = 0;
+
+        //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
+        trobarMonomis(s);
+
+
+        //arPolinomi és un array de la longitut que tindrá el polinomi
+        int[] arPolinomi = new int[maxExponent];
+
+
+        //Hauria de tornar un this.coef amb un array
+    }
+
+    /*
+    estat 0 = cercar signe --Després del signe->
+    estat 1 = coeficent de X --Al trobar una X->
+    estat 2 = cercar X --Després de la X->
+    estat 3 = Cercar ^ --Després del ^->
+    estat 4 = Cercar exponent --Al trobar un signe->> Repetir
+    */
+    private void trobarMonomis(String s) {
         int state = 0;
         char signe;
         int num = 0;
         int exponent;
+        int maxExponent = 0;
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -40,22 +65,17 @@ public class Polynomial {
                 state = 3;
             }
             else if (state == 3) {
-             state = 4;
+                state = 4;
             }
             else if (state == 4){
-                if (c == '-' || c == '+') state = 0;
-                exponent = c;
+                if (c == '-' || c == '+'){
+                    state = 0;
+                    i--;
+                } else
+                    exponent = c;
+                if (exponent > maxExponent) maxExponent = exponent;
             }
         }
-
-        //estat 0 = cercar signe --Després del signe->
-        //estat 1 = coeficent de X --Al trobar una X->
-        //estat 2 = cercar X --Després de la X->
-        //estat 3 = Cercar ^ --Després del ^->
-        //estat 4 = Cercar exponent --Al trobar un signe->> Repetir
-
-
-        //Hauria de tornar un this.coef amb un array
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
