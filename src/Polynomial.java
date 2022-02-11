@@ -1,6 +1,3 @@
-import java.sql.Struct;
-import java.util.Objects;
-
 public class Polynomial {
     float[] coef;
 
@@ -23,30 +20,35 @@ public class Polynomial {
         int maxExponent = 0;
 
         //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
-        trobarMonomis(s);
-
+        //L'hauriem de cridar 3 vegades perque necessitam 3 variables
+        maxExponent = trobarMonomis(s, null);
 
         //arPolinomi és un array de la longitut que tindrá el polinomi
-        int[] arPolinomi = new int[maxExponent];
+        int[] arPolinomi = new int[maxExponent +1];
 
 
-        //Hauria de tornar un this.coef amb un array
+        trobarMonomis(s, maxExponent);
+
+        //this.coef = arPolinomi;
     }
 
-    /*
+    /*s
     estat 0 = cercar signe --Després del signe->
     estat 1 = coeficent de X --Al trobar una X->
     estat 2 = cercar X --Després de la X->
     estat 3 = Cercar ^ --Després del ^->
     estat 4 = Cercar exponent --Al trobar un signe->> Repetir
     */
-    private void trobarMonomis(String s) {
+    private int trobarMonomis(String s, Integer varResult) {
         int state = 0;
         char signe;
         int num = 0;
-        int exponent;
+        int exponent = 0;
         int maxExponent = 0;
+        if (varResult != null){
+            int[] arSecundari = new int[varResult];
 
+        }
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             //Els espais s'ignoren
@@ -75,7 +77,12 @@ public class Polynomial {
                     exponent = c;
                 if (exponent > maxExponent) maxExponent = exponent;
             }
+            if (varResult != null){
+                arSecundari[exponent] = num;
+            }
         }
+        if (varResult == null) return maxExponent;
+        return num;
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou

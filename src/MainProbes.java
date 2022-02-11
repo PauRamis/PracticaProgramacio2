@@ -1,6 +1,6 @@
 public class MainProbes {
     public static void main(String[] args) {
-
+        /*
         float cfs[] = new float[]{-6, 0, 0, 20, -8};
 
         String compilador = "";
@@ -13,8 +13,9 @@ public class MainProbes {
             }
             System.out.print(compilador);
             if (i != cfs.length - 1 && cfs[i] != 0) System.out.print(" + ");
-        }
-
+        }*/
+        int[] arPolinomi = new int[3+1];
+        System.out.println(arPolinomi[1]);
     }
 
     private static String ferX(int i, int length) {
