@@ -12,24 +12,15 @@ public class Polynomial {
 
     // Constructor a partir d'un string
     public Polynomial(String s) {
-        /*Bucle que va rotant 'estat'
-        Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
-        char signe;
-        int num = 0;
-        int exponent;
         int maxExponent = 0;
 
         //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
-        //L'hauriem de cridar 3 vegades perque necessitam 3 variables
+        //L'hauriem de cridar 2 vegades perque necessitam la longitut i el contingut
         maxExponent = trobarMonomis(s, null);
 
-        //arPolinomi és un array de la longitut que tindrá el polinomi
-        int[] arPolinomi = new int[maxExponent +1];
+        //Tornam a cridar la funció, aquesta vegada per omplir l'array 'this.coef'
+        trobarMonomis(s, maxExponent+1);
 
-
-        trobarMonomis(s, maxExponent);
-
-        //this.coef = arPolinomi;
     }
 
     /*s
@@ -40,15 +31,19 @@ public class Polynomial {
     estat 4 = Cercar exponent --Al trobar un signe->> Repetir
     */
     private int trobarMonomis(String s, Integer varResult) {
+        /*Bucle que va rotant 'estat'
+        Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
         int state = 0;
-        char signe;
+        char signe = 0;
         int num = 0;
         int exponent = 0;
         int maxExponent = 0;
-        if (varResult != null){
-            int[] arSecundari = new int[varResult];
-
+        float[] arSecundari = new float[0];
+        //l'arSecundari l'usarem la segona volta per ficar els resultats
+        if (varResult != null) {
+            arSecundari = new float[varResult];
         }
+
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             //Els espais s'ignoren
@@ -78,10 +73,14 @@ public class Polynomial {
                 if (exponent > maxExponent) maxExponent = exponent;
             }
             if (varResult != null){
-                arSecundari[exponent] = num;
+                if (signe == '-') arSecundari[exponent] = num*(-1);
+                else arSecundari[exponent] = num;
+                //Tornam a posar el signe a 0 perque no els detecti a tots negatius
+                signe = 0;
             }
         }
         if (varResult == null) return maxExponent;
+        this.coef = arSecundari;
         return num;
     }
 
