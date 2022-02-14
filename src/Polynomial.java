@@ -17,64 +17,71 @@ public class Polynomial {
         //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
         //L'hauriem de cridar 2 vegades perque necessitam la longitut i el contingut
         maxExponent = trobarMonomis(s, null);
-
-        //Tornam a cridar la funció, aquesta vegada per omplir l'array 'this.coef'
-        trobarMonomis(s, maxExponent+1);
+        float[] arrayResult = new float[maxExponent];
+        //Tornam a cridar la funció, aquesta vegada per omplir l'array
+        trobarMonomis(s, arrayResult);
 
     }
 
-    private int trobarMonomis(String s, Integer varResult) {
+    private int trobarMonomis(String s, float[] varResult) {
         /*Bucle que va rotant 'estat'
         Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
         int state = 0;
         char signe = 0;
-        int num = 0;
+        String num = "";
         int exponent = 0;
         int maxExponent = 0;
-        float[] arSecundari = new float[0];
-        //l'arSecundari l'usarem la segona volta per ficar els resultats
-        if (varResult != null) {
-            arSecundari = new float[varResult];
-        }
 
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             //Els espais s'ignoren
             if (c == ' ') continue;
 
-            if (state == 0) {
-                if (c == '-') signe = '-';
+            //Cercam signe
+            if (c == '-') {
+                signe = '-';
                 state = 1;
             }
-            else if (state == 1) {
-                if (c == 'x') state = 2;
-                else num = num + c;
+
+            //Cercam coeficient
+            if (state == 1) {
+                if (c == 'x') {
+                    state = 2;
+                    if (num.equals("")) num = "1";
+                    if (signe == '-') num = signe + num;
+                } else {
+                    num += c;
+                }
             }
 
+            //Cercam X
             if (state == 2) {
                 state = 3;
-            }
-            else if (state == 3) {
+            } else if (state == 3) {
                 state = 4;
             }
-            else if (state == 4){
-                if (c == '-' || c == '+'){
+            //Cercam exponent, si trobam un signe, tornam a state 0
+            else if (state == 4) {
+                if (c == '-' || c == '+') {
                     state = 0;
                     i--;
                 } else
                     exponent = c;
                 if (exponent > maxExponent) maxExponent = exponent;
             }
-            if (varResult != null){
-                if (signe == '-') arSecundari[exponent] = num*(-1);
-                else arSecundari[exponent] = num;
+
+            /*if (varResult != null) {
+                else arSecundari[exponent] += num;
                 //Tornam a posar el signe a 0 perque no els detecti a tots negatius
                 signe = 0;
-            }
+            }*/
         }
         if (varResult == null) return maxExponent;
-        this.coef = arSecundari;
-        return num;
+        /*else {
+            this.coef = arSecundari;
+            return num;
+        }*/
+        return 1;
     }
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
