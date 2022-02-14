@@ -23,13 +23,6 @@ public class Polynomial {
 
     }
 
-    /*s
-    estat 0 = cercar signe --Després del signe->
-    estat 1 = coeficent de X --Al trobar una X->
-    estat 2 = cercar X --Després de la X->
-    estat 3 = Cercar ^ --Després del ^->
-    estat 4 = Cercar exponent --Al trobar un signe->> Repetir
-    */
     private int trobarMonomis(String s, Integer varResult) {
         /*Bucle que va rotant 'estat'
         Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
