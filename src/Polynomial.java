@@ -39,7 +39,7 @@ public class Polynomial {
             //Cercam signe
             if (c == '-') {
                 signe = '-';
-                state = 1;
+                state = 0;
             }
             if (state == 0) state = 1;
             else
@@ -67,12 +67,11 @@ public class Polynomial {
             //Cercam exponent, si trobam un signe, tornam a state 0
             else if (state == 4) {
                 if (c == '-' || c == '+') {
-                    if (varResult != null) varResult[exponent] = Float.parseFloat(num);
+                    if (varResult != null) varResult[exponent] += Float.parseFloat(num);
                     state = 0;
                     num = "";
                     exponent = 0;
                     i--;
-
                 } else
                     exponent = c + exponent;
                 if (exponent > maxExponent) maxExponent = exponent;

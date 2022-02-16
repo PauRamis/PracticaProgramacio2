@@ -16,6 +16,8 @@ public class MainProbes {
         }*/
         int[] arPolinomi = new int[3+1];
         System.out.println(arPolinomi[1]);
+        ferX(2,2);
+
     }
 
     private static String ferX(int i, int length) {
