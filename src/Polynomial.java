@@ -39,20 +39,17 @@ public class Polynomial {
             if (c == ' ') continue;
 
             //Cercam signe i continue amb estat 1, si no hi es, seguim amb estat 1 igualment.
-            if (c == '-') {
-                signe = '-';
+            if (state == 0) {
+                if (c == '-') {
+                    signe = '-';
+                    state = 1;
+                    continue;
+                }
                 state = 1;
-                continue;
             }
-            if (c == '+') {
-                signe = '-';
-                state = 1;
-                continue;
-            }
-            if (state == 0) state = 1;
 
             //Cercam coeficient
-            if (state == 1) {
+            else if (state == 1) {
                 if (c == 'x') {
                     state = 2;
                     if (num.equals("")) num = "1";
@@ -72,6 +69,7 @@ public class Polynomial {
 
             //Cercam X i el signe ^
             if (state == 2) {
+                if (c == 'x')
                 state = 3;
             } else if (state == 3) {
                 state = 4;
