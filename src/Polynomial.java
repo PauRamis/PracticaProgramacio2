@@ -12,23 +12,25 @@ public class Polynomial {
 
     // Constructor a partir d'un string
     public Polynomial(String s) {
-        int maxExponent = 0;
-        maxExponent = trobarMonomis(s, null);
-        float[] arrayResult = new float[maxExponent];
+        int maxExponent = trobarMonomis(s, null);
+        float[] arrayResult = new float[maxExponent + 1];
 
         //Tornam a cridar la funció, aquesta vegada per omplir l'array
+
         trobarMonomis(s, arrayResult);
 
+        //L'arrayResult es el que li hem de passar al toStrings
+        this.coef = arrayResult;
     }
+
     //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
     //L'hauriem de cridar 2 vegades perque necessitam la longitut i el contingut
-    private int trobarMonomis(String s, float[] varResult) {
-        /*Bucle que va rotant 'estat'
-        Depenguent de l'estat feim una operació o un altre amb el caracter trobat*/
+    private int trobarMonomis(String s, float[] arrayResult) {
+        //Bucle que va rotant 'state'. Depenguent de l'estat feim una operació o un altre amb el caracter trobat
         int state = 0;
         char signe = ' ';
         String num = "";
-        int exponent = 0;
+        String exponent = "0";
         int maxExponent = 0;
 
         for (int i = 0; i < s.length(); i++) {
@@ -36,13 +38,19 @@ public class Polynomial {
             //Els espais s'ignoren
             if (c == ' ') continue;
 
-            //Cercam signe
+            //Cercam signe i continue amb estat 1, si no hi es, seguim amb estat 1 igualment.
             if (c == '-') {
                 signe = '-';
-                state = 0;
+                state = 1;
+                continue;
+            }
+            if (c == '+') {
+                signe = '-';
+                state = 1;
+                continue;
             }
             if (state == 0) state = 1;
-            else
+
             //Cercam coeficient
             if (state == 1) {
                 if (c == 'x') {
@@ -56,6 +64,11 @@ public class Polynomial {
                     num += c;
                 }
             }
+            //Si despues de la X no hay un ^, grado 1 y al array
+            if (c == 'x' && s.charAt(i + 1) != '^') {
+                exponent = "1";
+                state = 4;
+            }
 
             //Cercam X i el signe ^
             if (state == 2) {
@@ -64,21 +77,22 @@ public class Polynomial {
                 state = 4;
             }
 
-            //Cercam exponent, si trobam un signe, tornam a state 0
-            else if (state == 4) {
-                if (c == '-' || c == '+') {
-                    if (varResult != null) varResult[exponent] += Float.parseFloat(num);
-                    state = 0;
-                    num = "";
-                    exponent = 0;
-                    i--;
-                } else
-                    exponent = c + exponent;
-                if (exponent > maxExponent) maxExponent = exponent;
+            //Cercam exponent, i ho ficam a l'array
+            else if (state == 4 || i == s.length() - 1) {
+                if (c != 'x' && state == 4) exponent += c;
+                int nExponent = Integer.parseInt(exponent);
+                if (nExponent > maxExponent) maxExponent = nExponent;
+                if (arrayResult != null) {
+                    float numInt = Float.parseFloat(num);
+                    if (signe == '-') numInt = numInt * -1;
+                    arrayResult[arrayResult.length - nExponent - 1] += numInt;
+                }
+                state = 0;
+                num = "";
+                exponent = "0";
             }
         }
-        if (varResult == null) return maxExponent;
-        this.coef = varResult;
+        if (arrayResult == null) return maxExponent;
         return 1;
     }
 
