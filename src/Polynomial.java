@@ -176,7 +176,20 @@ public class Polynomial {
     }
 
     private String posarSigne(int i, String compilador) {
-        //Si el numero és 0 o és el primer no es posa signe
+        //firstNumber será el primer numero que no és 0
+        int firstNumber = (int) coef[0];
+        int incremental = 0;
+        while (firstNumber == 0){
+            incremental++;
+            firstNumber = (int) coef[incremental];
+        }
+
+        //Si es el primer numero, no es posa signe
+        if (coef[i] == firstNumber)
+            return compilador;
+
+
+        //Si el numero és 0 no es posa signe
         if (coef[i] != 0 && coef[i] != coef[0]) {
             //Posam signe positiu o negatu
             if (coef[i] > 0) {
@@ -189,9 +202,8 @@ public class Polynomial {
         return compilador;
     }
 
+    //Funcio que posa la x i el seu exponent, si en necesita
     private String ferX(int i, int length) {
-        //length = 3
-        //position = 0-2
         String lletra = "X";
 
         //Si es l'ultim caracter, no té X
