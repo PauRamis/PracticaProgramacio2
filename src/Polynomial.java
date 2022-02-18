@@ -96,7 +96,18 @@ public class Polynomial {
 
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
     public Polynomial add(Polynomial p) {
-        return null;
+        int maxLength;
+        if (coef.length > p.coef.length)
+            maxLength = coef.length;
+        else
+            maxLength = p.coef.length;
+        //this.coef = p1
+        //p = p2
+        for (int i = 0; i < maxLength; i++) {
+            p.coef[i] += this.coef[i];
+        }
+
+        return p;
     }
 
     // Multiplica el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
