@@ -97,17 +97,24 @@ public class Polynomial {
     // Suma el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
     public Polynomial add(Polynomial p) {
         int maxLength;
-        if (coef.length > p.coef.length)
-            maxLength = coef.length;
+        if (this.coef.length > p.coef.length)
+            maxLength = this.coef.length;
         else
             maxLength = p.coef.length;
+        float [] tempAr = new float[maxLength];
         //this.coef = p1
-        //p = p2
-        for (int i = 0; i < maxLength; i++) {
-            p.coef[i] += this.coef[i];
+        //p.coef = p2
+        //Els hem de sumar dins el mateix array de dreta a esquerra
+
+        for (int i = 0; i < this.coef.length ; i++) {
+            tempAr [maxLength -i -1] += this.coef[this.coef.length -i -1];
+        }
+        for (int i = 0; i < p.coef.length; i++) {
+            tempAr [maxLength -i -1] += p.coef[p.coef.length -i -1];
         }
 
-        return p;
+
+        return new Polynomial(tempAr);
     }
 
     // Multiplica el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
