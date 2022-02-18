@@ -153,9 +153,10 @@ public class Polynomial {
             //Si el numero és 0, no és posa res
             if (coef[i] == 0) {
                 compilador = "";
+                continue;
             }
             //Si el numero és 1, només es posa la X
-            else if (coef[i] == 1) {
+            else if (coef[i] == 1|| coef[i] == -1) {
                 compilador = ferX(i, coef.length);
             }
             //Els altres casos, és posa el numero més la X
@@ -196,7 +197,9 @@ public class Polynomial {
                 compilador = " + " + compilador;
             } else {
                 //Pels negatius, simplement volem espaiar el signe negatiu
-                compilador = compilador.replace("-", " - ");
+                compilador = compilador.replace("-", "");
+                compilador = " - " + compilador;
+
             }
         }
         return compilador;
@@ -204,7 +207,7 @@ public class Polynomial {
 
     //Funcio que posa la x i el seu exponent, si en necesita
     private String ferX(int i, int length) {
-        String lletra = "X";
+        String lletra;
 
         //Si es l'ultim caracter, no té X
         if (i == length - 1) {

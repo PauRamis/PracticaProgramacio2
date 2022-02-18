@@ -104,11 +104,11 @@ public class PolynomialTest {
         p1 = new Polynomial(new float[]{5, 2, 10});
         p2 = new Polynomial(new float[]{-5, 0, 8});
         assertEquals(new Polynomial(new float[]{2, 18}), p1.add(p2));
-/*
+
         p1 = new Polynomial(new float[]{-2, 0});
         p2 = new Polynomial(new float[]{8, 0, 0, 0, 0, 0, 5, 0});
         p3 = new Polynomial(new float[]{-5, 0, 0, 0, 0, -1, 12, 0});
-        assertEquals("3x^7 - x^2 + 15x", p1.add(p2).add(p3).toString());*/
+        assertEquals("3x^7 - x^2 + 15x", p1.add(p2).add(p3).toString());
     }
 
     @Test
