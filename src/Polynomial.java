@@ -70,7 +70,7 @@ public class Polynomial {
             //Cercam X i el signe ^
             if (state == 2) {
                 if (c == 'x')
-                state = 3;
+                    state = 3;
             } else if (state == 3) {
                 state = 4;
             }
@@ -101,16 +101,14 @@ public class Polynomial {
             maxLength = this.coef.length;
         else
             maxLength = p.coef.length;
-        float [] tempAr = new float[maxLength];
-        //this.coef = p1
-        //p.coef = p2
-        //Els hem de sumar dins el mateix array de dreta a esquerra
+        float[] tempAr = new float[maxLength];
 
-        for (int i = 0; i < this.coef.length ; i++) {
-            tempAr [maxLength -i -1] += this.coef[this.coef.length -i -1];
+        //Els hem de sumar dins el mateix array de dreta a esquerra
+        for (int i = 0; i < this.coef.length; i++) {
+            tempAr[maxLength - i - 1] += this.coef[this.coef.length - i - 1];
         }
         for (int i = 0; i < p.coef.length; i++) {
-            tempAr [maxLength -i -1] += p.coef[p.coef.length -i -1];
+            tempAr[maxLength - i - 1] += p.coef[p.coef.length - i - 1];
         }
 
 
@@ -119,6 +117,21 @@ public class Polynomial {
 
     // Multiplica el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
     public Polynomial mult(Polynomial p2) {
+        int maxLength = this.coef.length * p2.coef.length;
+        float[] tempAr = new float[maxLength];
+
+        //Voldrém ficar el contingut del primer polinomi a l'array temporal
+        for (int i = 0; i < this.coef.length; i++) {
+            tempAr[maxLength - i - 1] += this.coef[this.coef.length - i - 1];
+        }
+        //Després multiplicarem els continguts pel segon polinomi si no són 0.
+        for (int i = 0; i < this.coef.length; i++) {
+            if (this.coef.length != 0)
+
+            tempAr[maxLength - i - 1] += p2.coef[p2.coef.length - i - 1];
+        }
+
+
         return null;
     }
 
@@ -156,7 +169,7 @@ public class Polynomial {
                 continue;
             }
             //Si el numero és 1, només es posa la X
-            else if (coef[i] == 1|| coef[i] == -1) {
+            else if (coef[i] == 1 || coef[i] == -1) {
                 compilador = ferX(i, coef.length);
             }
             //Els altres casos, és posa el numero més la X
@@ -180,7 +193,7 @@ public class Polynomial {
         //firstNumber será el primer numero que no és 0
         int firstNumber = (int) coef[0];
         int incremental = 0;
-        while (firstNumber == 0){
+        while (firstNumber == 0) {
             incremental++;
             firstNumber = (int) coef[incremental];
         }
