@@ -111,7 +111,6 @@ public class Polynomial {
             tempAr[maxLength - i - 1] += p.coef[p.coef.length - i - 1];
         }
 
-
         return new Polynomial(tempAr);
     }
 
@@ -126,6 +125,7 @@ public class Polynomial {
         //Ara els multiplicarem
         for (int i = 0; i < p2.coef.length; i++) {
             for (int j = 0; j < this.coef.length; j++) {
+
                 //Calculam l'exponent que tindrá el numero
                 exponent = this.coef.length + p2.coef.length - 2 - i - j;
 
