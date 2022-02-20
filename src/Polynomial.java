@@ -117,22 +117,24 @@ public class Polynomial {
 
     // Multiplica el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
     public Polynomial mult(Polynomial p2) {
-        int maxLength = this.coef.length * p2.coef.length;
+
+        //La longitut sirá la suma dels exponents maxims, o la longitut -1 cadascun.
+        int maxLength = this.coef.length + p2.coef.length;
+        int exponent;
         float[] tempAr = new float[maxLength];
 
-        //Voldrém ficar el contingut del primer polinomi a l'array temporal
-        for (int i = 0; i < this.coef.length; i++) {
-            tempAr[maxLength - i - 1] += this.coef[this.coef.length - i - 1];
+        //Ara els multiplicarem
+        for (int i = 0; i < p2.coef.length; i++) {
+            for (int j = 0; j < this.coef.length; j++) {
+                //Calculam l'exponent que tindrá el numero
+                exponent = this.coef.length + p2.coef.length - 2 - i - j;
+
+                //Calculam el numero
+                tempAr[maxLength - exponent - 1] += this.coef[j] * p2.coef[i];
+            }
         }
-        //Després multiplicarem els continguts pel segon polinomi si no són 0.
-        for (int i = 0; i < this.coef.length; i++) {
-            if (this.coef.length != 0)
 
-            tempAr[maxLength - i - 1] += p2.coef[p2.coef.length - i - 1];
-        }
-
-
-        return null;
+        return new Polynomial(tempAr);
     }
 
     // Divideix el polinomi amb un altre. No modifica el polinomi actual (this). Genera un de nou
