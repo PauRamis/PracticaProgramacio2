@@ -23,8 +23,7 @@ public class Polynomial {
         this.coef = arrayResult;
     }
 
-    //Una funció que cerca les parts concretes dels monomis, caracter per caracter.
-    //L'hauriem de cridar 2 vegades perque necessitam la longitut i el contingut
+    //Una funció que cerca els caracters dels monomis o la longitut d'aquets.
     private int trobarMonomis(String s, float[] arrayResult) {
         //Bucle que va rotant 'state'. Depenguent de l'estat feim una operació o un altre amb el caracter trobat
         int state = 0;
